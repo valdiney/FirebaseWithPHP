@@ -1,0 +1,54 @@
+#include <ESP8266WiFi.h>
+#include <ESP8266HTTPClient.h>
+
+const char* ssid = "SpeedNet_NossoDeus";
+const char* password = "@@valdiney";
+
+int pin = 13;
+
+void setup () {
+ 
+  Serial.begin(115200);
+  WiFi.begin(ssid, password);
+  
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+    Serial.print("Connecting..");
+  }
+
+  pinMode(pin, OUTPUT);
+ 
+}
+
+
+
+int value = 0;
+void loop() {
+ 
+    HTTPClient http;  
+    value++;
+
+    String temperatura = String(value);
+    String rota = "http://teste.wifiaqui.com.br/firebasephp/index.php?parametro=" + temperatura;
+    http.begin(rota);
+    int httpCode = http.GET();                                                        
+ 
+    if (httpCode > 0) { 
+ 
+      String payload = http.getString();   
+      Serial.println(payload);     
+
+      if (payload == "1") {
+         digitalWrite(pin, HIGH);
+         Serial.println("LIGADO");
+      } else {
+        digitalWrite(pin, LOW);
+        Serial.println("DESLIGADO");
+      }
+ 
+    }
+ 
+    http.end();   //Close connection
+   
+    //delay(5000);
+}

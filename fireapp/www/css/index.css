@@ -1,0 +1,34 @@
+body {
+    background:#039be5!important;
+    margin:10px!important;
+}
+
+.div-content {
+    background:white;
+    border-radius:3px;
+    min-height: 300px!important;
+}
+
+h3 {
+    text-align:center;
+    marin-top:0!important;
+}
+
+.center-div {
+
+  margin: 0 auto!important;
+  float: none!important;
+
+}
+
+.btn-ligar {
+	border-bottom:2px solid #499e49!important;
+}
+
+.btn-desligar {
+	border-bottom:2px solid #bf3e3a!important;
+}
+
+.status-led {
+	opacity:0.60;
+}
